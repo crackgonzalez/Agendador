@@ -1,61 +1,32 @@
-package models;
+package model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-/**
- * Representa una cita en el sistema.
- */
 public class Appointment {
-    private int id;             // Identificador único de la cita
-    private Date date;          // Fecha y hora de la cita
-    private String clientName;  // Nombre del cliente
-    private String description; // Descripción de la cita
-    private int userId;         // ID del usuario asociado a la cita
+    private int id;
+    private int userId;
+    private LocalDateTime dateTime;
+    private String description;
+    private String status;
 
     // Constructor vacío
-    public Appointment() {
-    }
+    public Appointment() {}
 
     // Constructor con parámetros
-    public Appointment(int id, Date date, String clientName, String description, int userId) {
-        this.id = id;
-        this.date = date;
-        this.clientName = clientName;
-        this.description = description;
+    public Appointment(int userId, LocalDateTime dateTime, String description, String status) {
         this.userId = userId;
+        this.dateTime = dateTime;
+        this.description = description;
+        this.status = status;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getUserId() {
@@ -66,15 +37,38 @@ public class Appointment {
         this.userId = userId;
     }
 
-    // Método toString
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Appointment{" +
                 "id=" + id +
-                ", date=" + date +
-                ", clientName='" + clientName + '\'' +
-                ", description='" + description + '\'' +
                 ", userId=" + userId +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
