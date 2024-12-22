@@ -98,8 +98,17 @@ public class AppointmentDAO {
         return appointments;
     }
     
-    // Método para actualizar el estado de una cita
+    // Método para actualizar el estado de una cita con validación
     public boolean updateAppointmentStatus(int appointmentId, String newStatus) {
+        // Lista de estados válidos
+        List<String> validStatuses = Arrays.asList("pending", "confirmed", "cancelled");
+
+        // Validar que el nuevo estado sea válido
+        if (!validStatuses.contains(newStatus)) {
+            System.err.println("Estado inválido: " + newStatus);
+            return false;
+        }
+
         String sql = "UPDATE appointments SET status = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, newStatus);
