@@ -1,24 +1,24 @@
 package models;
 
 /**
- * Representa un usuario del sistema.
+ * Representa a un usuario en el sistema.
  */
 public class User {
-    private int id;         // Identificador único del usuario
-    private String name;    // Nombre del usuario
-    private String email;   // Correo electrónico del usuario
-    private String password; // Contraseña del usuario
+    private int id;           // Identificador único del usuario
+    private String username;  // Nombre de usuario
+    private String password;  // Contraseña
+    private String role;      // Rol del usuario (e.g., "admin", "employee", "client")
 
     // Constructor vacío
     public User() {
     }
 
     // Constructor con parámetros
-    public User(int id, String name, String email, String password) {
+    public User(int id, String username, String password, String role) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     // Getters y setters
@@ -30,20 +30,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -54,14 +46,21 @@ public class User {
         this.password = password;
     }
 
-    // Método toString para representar al usuario como texto
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    // Método toString
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

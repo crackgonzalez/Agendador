@@ -17,33 +17,31 @@ public class Main {
                 System.out.println("¡Conexión exitosa a la base de datos!");
             }
             
-            // Crear el DAO para manejar usuarios
+            // Código dentro del main()
             UserDAO userDAO = new UserDAO(conn);
-            
-            // Crear un nuevo usuario y guardarlo en la base de datos
-            User newUser = new User();
-            newUser.setName("Juan Pérez");
-            newUser.setEmail("juan.perez@example.com");
-            newUser.setPassword("123456");
 
-            boolean isInserted = userDAO.insertUser(newUser);
-            if (isInserted) {
-                System.out.println("Usuario insertado exitosamente.");
+            // Registrar un nuevo usuario
+            User newUser = new User();
+            newUser.setUsername("admin");
+            newUser.setPassword("12345");
+            newUser.setRole("admin");
+
+            boolean isRegistered = userDAO.registerUser(newUser);
+            if (isRegistered) {
+                System.out.println("Usuario registrado exitosamente.");
             } else {
-                System.out.println("Error al insertar usuario.");
+                System.out.println("Error al registrar el usuario.");
             }
-            
-            // Obtener todos los usuarios y mostrarlos
-            List<User> users = userDAO.getAllUsers();
-            if (users.isEmpty()) {
-                System.out.println("No hay usuarios en la base de datos.");
+
+            // Autenticar un usuario
+            User authenticatedUser = userDAO.authenticate("admin", "12345");
+            if (authenticatedUser != null) {
+                System.out.println("Autenticación exitosa: " + authenticatedUser);
             } else {
-                System.out.println("Usuarios en la base de datos:");
-                for (User user : users) {
-                    System.out.println(user);
-                }
+                System.out.println("Credenciales incorrectas.");
             }
-            
+
+
             
         } catch (Exception e) {
             System.err.println("Error al conectar con la base de datos:");
