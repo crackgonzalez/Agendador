@@ -97,4 +97,20 @@ public class AppointmentDAO {
 
         return appointments;
     }
+    
+    // Método para actualizar el estado de una cita
+    public boolean updateAppointmentStatus(int appointmentId, String newStatus) {
+        String sql = "UPDATE appointments SET status = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newStatus);
+            statement.setInt(2, appointmentId);
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
