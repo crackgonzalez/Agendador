@@ -17,7 +17,6 @@ public class Main {
                 System.out.println("¡Conexión exitosa a la base de datos!");
             }
             
-           
         } catch (Exception e) {
             System.err.println("Error al conectar con la base de datos:");
             e.printStackTrace();

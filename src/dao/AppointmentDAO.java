@@ -3,9 +3,9 @@ package dao;
 import model.Appointment;
 import utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppointmentDAO {
     private Connection connection;
@@ -29,5 +29,31 @@ public class AppointmentDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    // Método para listar todas las citas
+    public List<Appointment> getAllAppointments() {
+        List<Appointment> appointments = new ArrayList<>();
+        String sql = "SELECT * FROM appointments";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                Appointment appointment = new Appointment();
+                appointment.setId(resultSet.getInt("id"));
+                appointment.setUserId(resultSet.getInt("user_id"));
+                appointment.setDateTime(resultSet.getTimestamp("date_time").toLocalDateTime());
+                appointment.setDescription(resultSet.getString("description"));
+                appointment.setStatus(resultSet.getString("status"));
+
+                appointments.add(appointment);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return appointments;
     }
 }
